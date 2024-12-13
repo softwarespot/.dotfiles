@@ -1,0 +1,31 @@
+[user]
+    name = FULL NAME
+    email = EMAIL
+[color]
+    ui = auto
+[core]
+    autocrlf = input
+    editor = vim
+[alias]
+    # https://snyk.io/blog/10-git-aliases-for-faster-and-productive-git-workflow/
+    alias = !git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    ci = commit
+    ciane = commit --amend --no-edit
+    co = checkout
+    cob = checkout -b
+    diff = diff --color-words
+    diffc = diff --cached
+    l = ls
+    ll = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat --date=relative
+    ls = log --color --graph --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    pullr = pull --rebase
+    se = !git rev-list --all | xargs git grep -F
+    squash-all = "!f(){ git reset $(git commit-tree HEAD^{tree} -m \"${1:-Initial commit}\");};f"
+    st = status -sb
+    undo = reset HEAD~1 --mixed
+    up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+[pull]
+    rebase = true
+[init]
+    defaultBranch = main
